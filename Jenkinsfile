@@ -44,15 +44,16 @@ pipeline {
       }
     }
     stage('junit'){
-    steps{
-      script {
-        try {
-          junit 'app/build/test-results/**/*.xml'
-        } catch (Exception e) {
-          echo e.getMessage()
-          echo "junit failed"
-        }
-      }       
+      steps{
+        script {
+          try {
+            junit 'app/build/test-results/**/*.xml'
+          } catch (Exception e) {
+            echo e.getMessage()
+            echo "junit failed"
+          }
+        }       
+      }
     }
     stage('Sonarqube') {
       environment {
