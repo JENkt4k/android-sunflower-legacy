@@ -78,9 +78,9 @@ pipeline {
     always {
       androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'app/build/reports/**/*', unHealthy: ''
       archiveArtifacts 'app/build/outputs/apk/**/*.apk'
-      archiveArtifacts 'app/**/tests/**/*.xml'
-      archiveArtifacts 'app/**/tests/**/*.js'
-      archiveArtifacts 'app/**/tests/**/*.html'
+      archiveArtifacts 'app/**/*test*/**/*.xml'
+      archiveArtifacts 'app/**/*test*/**/*.js'
+      archiveArtifacts 'app/**/*test*/**/*.html'
       dir('app/build/test-results'){ 
         deleteDir()
       }
