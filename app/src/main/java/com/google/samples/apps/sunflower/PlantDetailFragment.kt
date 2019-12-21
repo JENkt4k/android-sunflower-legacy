@@ -47,7 +47,7 @@ class PlantDetailFragment : Fragment() {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
     }
 
-    //test
+    // test
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
