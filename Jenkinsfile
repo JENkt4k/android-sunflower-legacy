@@ -59,10 +59,7 @@ pipeline {
       steps{
         script {
           try {
-            sh 'adb devices'
-            sh 'adb connect 192.168.1.6:5555'
-            sh 'adb shell getprop'
-            sh './gradlew -Pcoverage=true createDebugCoverageReport'
+            sh './gradlew -Pcoverage=true testDebugUnitTest'
           } catch (Exception e) {
             echo e.getMessage()
             echo "coverage failed"
