@@ -59,6 +59,7 @@ pipeline {
       steps{
         script {
           try {
+            adb devices
             adb connect localhost:5555
             adb shell getprop
             sh './gradlew -Pcoverage=true createDebugCoverageReport'
