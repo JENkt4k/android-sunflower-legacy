@@ -60,7 +60,7 @@ pipeline {
         script {
           try {
             sh 'adb devices'
-            sh 'adb connect localhost:5555'
+            sh 'adb connect 192.168.1.6:5555'
             sh 'adb shell getprop'
             sh './gradlew -Pcoverage=true createDebugCoverageReport'
           } catch (Exception e) {
