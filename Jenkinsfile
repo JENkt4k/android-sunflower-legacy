@@ -59,7 +59,7 @@ pipeline {
       steps{
         script {
           try {
-            sh './gradlew createDebugCoverageReport --warning-mode all'
+            sh './gradlew -Pcoverage=true createDebugCoverageReport'
           } catch (Exception e) {
             echo e.getMessage()
             echo "coverage failed"
