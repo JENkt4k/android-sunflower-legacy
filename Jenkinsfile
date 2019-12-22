@@ -55,6 +55,18 @@ pipeline {
         }       
       }
     }
+    stage('coverage'){
+      steps{
+        script {
+          try {
+            sh 'gradlew createDebugCoverageReport --warning-mode all'
+          } catch (Exception e) {
+            echo e.getMessage()
+            echo "coverage failed"
+          }
+        }       
+      }
+    }
     stage('Sonarqube') {
       environment {
         scannerHome = tool 'SonarQubeScanner'
