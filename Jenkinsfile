@@ -47,7 +47,7 @@ pipeline {
       steps{
         script {
           try {
-            junit 'app/build/test-results/**/*.xml'
+            junit 'app/build/reports/**/*.xml'
           } catch (Exception e) {
             echo e.getMessage()
             echo "junit failed"
