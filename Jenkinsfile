@@ -34,7 +34,6 @@ pipeline {
             script {
               try {
                 sh './gradlew test'
-                junit 'app/build/test-results/**/*.xml'
               } catch (Exception e) {
                 echo e.getMessage()
                 echo "test failed"
@@ -42,6 +41,30 @@ pipeline {
             }       
           }   
         }
+      }
+    }
+    stage('junit'){
+      steps{
+        script {
+          try {
+            junit 'app/build/reports/**/*.xml'
+          } catch (Exception e) {
+            echo e.getMessage()
+            echo "junit failed"
+          }
+        }       
+      }
+    }
+    stage('coverage'){
+      steps{
+        script {
+          try {
+            sh './gradlew createDebugCoverageReport --warning-mode all'
+          } catch (Exception e) {
+            echo e.getMessage()
+            echo "coverage failed"
+          }
+        }       
       }
     }
     stage('Sonarqube') {
@@ -65,11 +88,12 @@ pipeline {
   }
   post {
     always {
+      archiveArtifacts 'app/build/reports/**/*.xml'
       androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'app/build/reports/**/*', unHealthy: ''
       archiveArtifacts 'app/build/outputs/apk/**/*.apk'
-      archiveArtifacts 'app/build/**/tests/**/*.xml'
-      archiveArtifacts 'app/build/**/tests/**/*.js'
-      archiveArtifacts 'app/build/**/tests/**/*.html'
+      archiveArtifacts 'app/**/*test*/**/*.xml'
+      archiveArtifacts 'app/**/*test*/**/*.js'
+      archiveArtifacts 'app/**/*test*/**/*.html'
       dir('app/build/test-results'){ 
         deleteDir()
       }
