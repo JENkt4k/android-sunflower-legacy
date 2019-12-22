@@ -76,6 +76,7 @@ pipeline {
   }
   post {
     always {
+      archiveArtifacts 'app/build/reports/**/*.xml'
       androidLint canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'app/build/reports/**/*', unHealthy: ''
       archiveArtifacts 'app/build/outputs/apk/**/*.apk'
       archiveArtifacts 'app/**/*test*/**/*.xml'
