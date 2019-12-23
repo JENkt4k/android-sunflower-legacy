@@ -49,7 +49,7 @@ pipeline {
       steps{
         script {
           try {
-            junit 'app/build/reports/**/*.xml'
+            junit 'app/build/test-results/**/*.xml'
           } catch (Exception e) {
             echo e.getMessage()
             echo "junit failed"
@@ -102,6 +102,9 @@ pipeline {
       dir('app/build/test-results'){ 
         deleteDir()
       }
+      //dir('app/build/reports'){ 
+      //  deleteDir()
+      //}
       
     }
   }
