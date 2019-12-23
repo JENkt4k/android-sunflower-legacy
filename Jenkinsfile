@@ -26,6 +26,7 @@ pipeline {
                 echo e.getMessage()
                 echo "Lint failed"
               }
+              echo currentBuild.result
             }       
           }
         }
@@ -38,6 +39,7 @@ pipeline {
                 echo e.getMessage()
                 echo "test failed"
               }
+              echo currentBuild.result
             }       
           }   
         }
@@ -52,6 +54,7 @@ pipeline {
             echo e.getMessage()
             echo "junit failed"
           }
+          echo currentBuild.result
         }       
       }
     }
@@ -59,11 +62,13 @@ pipeline {
       steps{
         script {
           try {
-            sh './gradlew -Pcoverage=true testDebugUnitTest'
+            sh './gradlew -Pcoverage=true createDebugCoverageReport'
+            //sh './gradlew -Pcoverage=true testDebugUnitTest' 
           } catch (Exception e) {
             echo e.getMessage()
             echo "coverage failed"
           }
+          echo currentBuild.result
         }       
       }
     }
